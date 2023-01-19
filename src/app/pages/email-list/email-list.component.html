@@ -1,0 +1,52 @@
+<section class="email-list flex column">
+
+    <header class="list-header flex align-center space-between">
+        <div class="sub1 flex align-center">
+            <div class="input-wrapper">
+                <input type="checkbox">
+
+            </div>
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-rotate-right fa-sm"></i>
+            </div>
+        </div>
+
+        <!-- Actions bar -->
+        <div class="actions-list flex align-center grow" *ngIf="selectedEmails.length">
+            <div class="icon-wrapper" (click)="onRemoveEmails()">
+                <i class="fa-regular fa-trash-can"></i>
+            </div>
+            <div class="icon-wrapper" (click)="onSetReadStat()">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="img-wrapper" (click)="onSetTab('starred')">
+                <img  src="../../../assets/icons/starred.png" alt="">
+            </div>
+            <div class="img-wrapper" (click)="onSetTab('important')">
+                <img  src="../../../assets/icons/important.png" alt="">
+            </div>
+
+        </div>
+
+        <!-- Paging section -->
+        <div class="paging-wrapper flex align-center">
+            <span class="paging-counter">{{(filterBy$!|async)!.page!+1}} of {{(totalPages$|async)}}</span>
+
+            <button [disabled]="!(filterBy$!|async)!.page" class="icon-wrapper1" (click)="setPage(-1)">
+                <i class="fa-solid fa-chevron-left fa-xs"></i>
+            </button>
+            <button [disabled]="(filterBy$!|async)!.page!+1===(totalPages$|async)" class="icon-wrapper1"
+                (click)="setPage(1)">
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+            </button>
+        </div>
+
+    </header>
+
+    <section class="grow list-content">
+        <email-preview (toggleCheckbox)="toggleCheckbox($event)" (toggleTab)="toggleTab($event)"
+         *ngFor="let email of (emails$|async)" [email]="email"
+            [tab]="tab" [label]="label"></email-preview>
+
+    </section>
+</section>
