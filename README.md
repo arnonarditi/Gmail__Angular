@@ -13,6 +13,8 @@ TypeScript,
 
 Custom pipes, etc.
 
+NOTE: responsive app still in progress and will be completed soon.
+
 ## Tech Stack
 
 **Client:** Angular, NgRx, SCSS
